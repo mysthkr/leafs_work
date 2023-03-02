@@ -190,4 +190,4 @@ ja:
     task: タスク
     detail: 詳細
     id_order: ID順
-    created_order_desc: 作成日時（降順）
+    created_order_desc: 作成日時降順

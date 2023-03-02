@@ -14,7 +14,7 @@
 
   <% @tasks.each do |task| %>
     <tr>
-      <td><%= task.task_name %></td>
+      <td class="task_name"><%= task.task_name %></td>
       <td><%= task.task_detail %></td>
       
       <td><%= link_to t('view.task_detail'), task_path(task.id) %></td>
