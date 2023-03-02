@@ -1,11 +1,5 @@
-  <% if @task.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@task.errors.count, "error") %> prohibited this feed from being saved:</h2>
+<%= link_to 'タスク一覧', tasks_path %>
 
-      <ul>
-        <% @task.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+<h1>タスク詳細画面</h1>
+<p>タスク: <%= @task.task_name %></p>
+<p>詳細: <%= @task.task_detail %></p>
