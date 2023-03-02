@@ -1,24 +1,38 @@
-# README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+（モデル名、カラム名、データ型）
 
-Things you may want to cover:
+User
+|  id  |  email   |digest_password |  name  |
+| ---- | -------- | -------------- | ------ |
+| int  |  string  |  string        | string |
 
-* Ruby version
 
-* System dependencies
+Task
+|  id  |  task_name | task_detail | status |  due_date  | priority |
+| ---- | ---------- | ----------- | ------ | ---------- | -------- |
+| int  |   string   |   string    |  int   |  datetime  |   int    |
 
-* Configuration
 
-* Database creation
+Label
+|  id  |  label_name |
+| ---- | ----------- | 
+| int  |    string   |
 
-* Database initialization
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+rails g model user email:string password_digest:string name:string
 
-* Deployment instructions
+rails g model task task_name:string status:int due_date:datetime priority:int task_detail:string
 
-* ...
+rails g model label label_name:string
+
+bin/rails db:migrate:redo で自分が書いたマイグレーションが、バージョンを下げる際にも問題なく動く事を確認
+
+
+
+作成するテーブルとカラムは、タスクの名前と詳細のみとする
+rails g model task task_name:string task_detail:string
+マイグレーションは1つ前の状態に戻せることを担保することが重要。redo を実行して確認する癖をつけましょう
+rails db:migrate:redo
+データベースの制約についても忘れずに設定する
+データベースの制約を設定する（追記する）マイグレーションファイルを作成する。マイグレーションファイルだけを作成したいので、rails g migration コマンドで作成する
