@@ -9,13 +9,14 @@
     <th>詳細</th>
   </tr>
 
-<% @tasks.each do |task| %>
-  <tr>
-    <td><%= task.task_name %></td>
-    <td><%= task.task_detail %></td>
-    
-    <td><%= link_to '詳細を確認する', task_path(task.id) %></td>
-    <td><%= link_to "タスクを編集する", edit_task_path(task.id) %></td>
-  </tr>
-<% end %>
+  <% @tasks.each do |task| %>
+    <tr>
+      <td><%= task.task_name %></td>
+      <td><%= task.task_detail %></td>
+      
+      <td><%= link_to '詳細を確認する', task_path(task.id) %></td>
+      <td><%= link_to "タスクを編集する", edit_task_path(task.id) %></td>
+      <td><%= link_to 'タスクを削除する', task_path(task.id), method: :delete %></td>
+    </tr>
+  <% end %>
 </table>
