@@ -1,0 +1,17 @@
+
+<%= link_to 'タスク作成', new_task_path %>
+<h1>タスク一覧</h1>
+
+<table>
+  <tr>
+    <th>タスク</th>
+    <th>詳細</th>
+  </tr>
+
+<% @tasks.each do |task| %>
+  <tr>
+    <td><%= task.task_name %></td>
+    <td><%= task.task_detail %></td>
+  </tr>
+<% end %>
+</table>
