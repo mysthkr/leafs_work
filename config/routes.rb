@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :tasks do
     collection do
-      get 'created_order_desc'
+      get 'index_created_desc'
     end
   end
   

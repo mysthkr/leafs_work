@@ -6,8 +6,8 @@ class TasksController < ApplicationController
   end
   
   def index_created_desc
-    @tasks = Task.all.order(name: :desc)
-    render :tasks
+    @tasks = Task.all.order(created_at: :desc)
+    render "index"
   end
   
   def new

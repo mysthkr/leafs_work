@@ -4,7 +4,7 @@
 <h1><%= t('view.task_list') %></h1>
 
 <%= link_to t('view.id_order'), tasks_path %>
-<%= link_to t('view.created_order_desc'), controller: :tasks, action: :index_created_desc %>
+<%= link_to t('view.created_order_desc'), index_created_desc_tasks_path %>
 
 <table>
   <tr>
