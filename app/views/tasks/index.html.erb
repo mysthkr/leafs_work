@@ -4,7 +4,8 @@
 <h1><%= t('view.task_list') %></h1>
 
 <%= link_to t('view.id_order'), tasks_path %>
-<%= link_to t('view.created_order_desc'), index_created_desc_tasks_path %>
+<%= link_to t('view.created_order_desc'), tasks_path(sort_created: "true") %>
+<%= link_to t('due_date_sort'), tasks_path(sort_expired: "true") %>
 
 <table>
   <tr>

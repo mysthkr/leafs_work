@@ -34,17 +34,14 @@ RSpec.describe 'タスク管理機能', type: :system do
         visit tasks_path
         tasks_before = []
         tasks_after = []
-        tasks = page.all(".task_name")
         
-        tasks.each do |task|
+        tasks_bf = page.all(".task_name")
+        tasks_bf.each do |task|
           tasks_before << task['innerHTML']
         end
 
-        # click_link '作成日時降順'
-        visit index_created_desc_tasks_path
-        
+        visit tasks_path(sort_created: "true")
         tasks_af = page.all(".task_name")
-        p tasks_af
         tasks_af.each do |task|
           tasks_after << task['innerHTML']
         end
@@ -55,6 +52,36 @@ RSpec.describe 'タスク管理機能', type: :system do
         expect(tasks_before[1]).to eq tasks_after[1]
         expect(tasks_before[2]).to eq tasks_after[2]
         expect(tasks_before[3]).to eq tasks_after[3]
+        expect(tasks_before[4]).to eq tasks_after[4]
+      end
+    end
+    
+    context 'タスクが終了期日の昇順に並んでいる場合' do
+      it '期日の一番古いタスクが一番上に表示される' do
+        FactoryBot.create(:task)
+        FactoryBot.create(:second_task)
+        FactoryBot.create(:third_task)
+        FactoryBot.create(:forth_task)
+        FactoryBot.create(:fifth_task)
+        visit tasks_path
+        tasks_before = []
+        tasks_after = []
+        
+        tasks_bf = page.all(".task_name")
+        tasks_bf.each do |task|
+          tasks_before << task['innerHTML']
+        end
+        
+        visit tasks_path(sort_expired: "true")
+        tasks_af = page.all(".task_name")
+        tasks_af.each do |task|
+          tasks_after << task['innerHTML']
+        end
+
+        expect(tasks_before[2]).to eq tasks_after[0]
+        expect(tasks_before[1]).to eq tasks_after[1]
+        expect(tasks_before[3]).to eq tasks_after[2]
+        expect(tasks_before[0]).to eq tasks_after[3]
         expect(tasks_before[4]).to eq tasks_after[4]
       end
     end
