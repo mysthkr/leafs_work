@@ -191,3 +191,4 @@ ja:
     detail: 詳細
     id_order: ID順
     created_order_desc: 作成日時降順
+    due_date: 終了期限

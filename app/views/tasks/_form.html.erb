@@ -20,5 +20,9 @@
     <%= form.label :task_detail %>
     <%= form.text_field :task_detail %>
   </div>
+  <div class="task_due_date">
+    <%= form.datetime_field :due_date, value: Time.current.strftime('%Y-%m-%dT00:00:00') %>
+  </div>
+  
   <%= form.submit %>
 <% end %>

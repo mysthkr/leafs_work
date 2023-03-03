@@ -10,12 +10,14 @@
   <tr>
     <th><%= t('view.task') %></th>
     <th><%= t('view.detail') %></th>
+    <th><%= t('view.due_date') %></th>
   </tr>
 
   <% @tasks.each do |task| %>
     <tr>
       <td class="task_name"><%= task.task_name %></td>
       <td><%= task.task_detail %></td>
+      <td><%= task.due_date.strftime('%Y-%m-%dT%T') %></td>
       
       <td><%= link_to t('view.task_detail'), task_path(task.id) %></td>
       <td><%= link_to t('view.edit_task'), edit_task_path(task.id) %></td>
