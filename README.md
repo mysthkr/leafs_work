@@ -19,3 +19,9 @@ Label
 | int  |    string   |
 
 
+###Heroku###
+heroku login
+heroku config
+git add .
+git commit -m ""
+git push heroku step2:master
