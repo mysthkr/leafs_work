@@ -5,6 +5,11 @@ class TasksController < ApplicationController
     @tasks = Task.all
   end
   
+  def index_created_desc
+    @tasks = Task.all.order(created_at: :desc)
+    render "index"
+  end
+  
   def new
     @task = Task.new
   end

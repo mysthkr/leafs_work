@@ -1,10 +1,12 @@
 require 'rails_helper'
 RSpec.describe 'タスク管理機能', type: :system do
   describe '新規作成機能' do
+    before do
+      # 「一覧画面に遷移した場合」や「タスクが作成日時の降順に並んでいる場合」など、contextが実行されるタイミングで、before内のコードが実行される
+      visit tasks_path
+    end
     context 'タスクを新規作成した場合' do
       it '作成したタスクが表示される' do
-        # 1. new_task_pathに遷移する（新規作成ページに遷移する）
-        # ここにnew_task_pathにvisitする処理を書く
         visit new_task_path
         # 2. 新規登録内容を入力する
         #「タスク名」というラベル名の入力欄と、「タスク詳細」というラベル名の入力欄にタスクのタイトルと内容をそれぞれ入力する
@@ -13,13 +15,47 @@ RSpec.describe 'タスク管理機能', type: :system do
         # ここに「タスク詳細」というラベル名の入力欄に内容をfill_in（入力）する処理を書く
         fill_in "Task detail", with: "test detail"
         # 3. 「登録する」というvalue（表記文字）のあるボタンをクリックする
-        # ここに「登録する」というvalue（表記文字）のあるボタンをclick_onする（クリックする）する処理を書く
-        click_button 'Create Task'
-        # 4. clickで登録されたはずの情報が、タスク詳細ページに表示されているかを確認する
-        # （タスクが登録されたらタスク詳細画面に遷移されるという前提）
-        # ここにタスク詳細ページに、テストコードで作成したデータがタスク詳細画面にhave_contentされているか（含まれているか）を確認（期待）するコードを書く
+        # ここに「登録する」というvalue（表記文字）のあるボタンをclick_onする（クリックする���する処理を書く
+        click_button '登録する'
         expect(page).to have_content "test name"
         expect(page).to have_content "test detail"
+      end
+    end
+    # テスト内容を追加で記載する
+    context 'タスクが作成日時の降順に並んでいる場合' do
+      it '新しいタスクが一番上に表示される' do
+        # ここに実装する
+        FactoryBot.create(:task)
+        FactoryBot.create(:second_task)
+        FactoryBot.create(:third_task)
+        FactoryBot.create(:forth_task)
+        FactoryBot.create(:fifth_task)
+        
+        visit tasks_path
+        tasks_before = []
+        tasks_after = []
+        tasks = page.all(".task_name")
+        
+        tasks.each do |task|
+          tasks_before << task['innerHTML']
+        end
+
+        # click_link '作成日時降順'
+        visit index_created_desc_tasks_path
+        
+        tasks_af = page.all(".task_name")
+        p tasks_af
+        tasks_af.each do |task|
+          tasks_after << task['innerHTML']
+        end
+        
+        tasks_after.reverse!
+        
+        expect(tasks_before[0]).to eq tasks_after[0]
+        expect(tasks_before[1]).to eq tasks_after[1]
+        expect(tasks_before[2]).to eq tasks_after[2]
+        expect(tasks_before[3]).to eq tasks_after[3]
+        expect(tasks_before[4]).to eq tasks_after[4]
       end
     end
   end
@@ -44,7 +80,7 @@ RSpec.describe 'タスク管理機能', type: :system do
       it '該当タスクの内容が表示される' do
         task = FactoryBot.create(:task)
         visit tasks_path
-        click_link '詳細を確認する'
+        all('tbody tr')[1].click_link 'タスク詳細'
         expect(page).to have_content "test_name"
         expect(page).to have_content "test_detail"
       end

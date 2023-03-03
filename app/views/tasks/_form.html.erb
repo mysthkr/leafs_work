@@ -10,7 +10,7 @@
   </div>
 <% end %>
 
-<%= link_to 'タスク一覧', tasks_path %>
+<%= link_to t('view.task_list'), tasks_path %>
 <%= form_with(model: @task, local: true) do |form| %>
   <div class="task_name">
     <%= form.label :task_name %>
