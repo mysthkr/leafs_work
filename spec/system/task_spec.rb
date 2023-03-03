@@ -15,7 +15,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         # ここに「タスク詳細」というラベル名の入力欄に内容をfill_in（入力）する処理を書く
         fill_in "Task detail", with: "test detail"
         # 3. 「登録する」というvalue（表記文字）のあるボタンをクリックする
-        # ここに「登録する」というvalue（表記文字）のあるボタンをclick_onする（クリックする）する処理を書く
+        # ここに「登録する」というvalue（表記文字）のあるボタンをclick_onする（クリックする���する処理を書く
         click_button '登録する'
         expect(page).to have_content "test name"
         expect(page).to have_content "test detail"
@@ -40,13 +40,17 @@ RSpec.describe 'タスク管理機能', type: :system do
           tasks_before << task['innerHTML']
         end
 
-        click_link '作成日時降順'
+        # click_link '作成日時降順'
+        visit index_created_desc_tasks_path
         
-        tasks_af = page.all('.task_name')
+        tasks_af = page.all(".task_name")
+        p tasks_af
         tasks_af.each do |task|
           tasks_after << task['innerHTML']
         end
+        
         tasks_after.reverse!
+        
         expect(tasks_before[0]).to eq tasks_after[0]
         expect(tasks_before[1]).to eq tasks_after[1]
         expect(tasks_before[2]).to eq tasks_after[2]
