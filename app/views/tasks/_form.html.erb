@@ -23,6 +23,10 @@
   <div class="task_due_date">
     <%= form.datetime_field :due_date, value: Time.current.strftime('%Y-%m-%dT00:00:00') %>
   </div>
+  <div class="task_status">
+    <%= form.label :status %>
+    <%= form.select :status, [["ToDo", "ToDo"], ["Doing", "Doing"], ["Done", "Done"]] %>
+  </div>
   
   <%= form.submit %>
 <% end %>

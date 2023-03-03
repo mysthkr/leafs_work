@@ -19,9 +19,9 @@ RSpec.describe 'タスク管理機能', type: :system do
         click_button '登録する'
         expect(page).to have_content "test name"
         expect(page).to have_content "test detail"
+        expect(page).to have_content "ToDo"
       end
     end
-    # テスト内容を追加で記載する
     context 'タスクが作成日時の降順に並んでいる場合' do
       it '新しいタスクが一番上に表示される' do
         # ここに実装する
@@ -110,6 +110,41 @@ RSpec.describe 'タスク管理機能', type: :system do
         all('tbody tr')[1].click_link 'タスク詳細'
         expect(page).to have_content "test_name"
         expect(page).to have_content "test_detail"
+      end
+    end
+  end
+  
+  describe '検索機能' do
+    before do
+      FactoryBot.create(:task)
+      FactoryBot.create(:second_task)
+      FactoryBot.create(:third_task)
+      FactoryBot.create(:forth_task)
+      FactoryBot.create(:fifth_task)
+      visit tasks_path
+    end
+    context 'タイトルで検索した場合' do
+      it '検索内容を含むタスクの内容が表示される' do
+        fill_in "Task name", with: "e_3"
+        click_button '検索する'
+        expect(page).to have_content "test_name_3"
+      end
+    end
+    
+    context 'ステータスで検索した場合' do
+      it '該当ステータスのタスクのみ表示される' do
+        select 'Done', from: 'task[status]'
+        click_button '検索する'
+        expect(page).to have_content "test_name_4"
+      end
+    end
+    
+    context 'タイトルとステータスの両方で検索した場合' do
+      it '該当ステータスのタスクかつ検索内容を含むタスクが表示される' do
+        fill_in "Task name", with: "e_5"
+        select 'ToDo', from: 'task[status]'
+        click_button '検索する'
+        expect(page).to have_content "test_name_5"
       end
     end
   end

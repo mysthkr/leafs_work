@@ -193,3 +193,6 @@ ja:
     created_order_desc: 作成日時降順
     due_date: 終了期限
     due_date_sort: 終了期限でソートする
+    status: ステータス
+    
+    
