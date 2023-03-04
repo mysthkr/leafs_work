@@ -85,6 +85,27 @@ RSpec.describe 'タスク管理機能', type: :system do
         expect(tasks_before[4]).to eq tasks_after[4]
       end
     end
+    
+    context 'タスクが優先順位の昇順に並んでいる場合' do
+      it '優先順位の高いタスクが一番上に表示される' do
+        FactoryBot.create(:task)
+        FactoryBot.create(:second_task)
+        FactoryBot.create(:third_task)
+        FactoryBot.create(:forth_task)
+        FactoryBot.create(:fifth_task)
+        
+        visit tasks_path
+        tasks_after = []
+
+        visit tasks_path(sort_priority: "true")
+        tasks_af = page.all(".task_name")
+        tasks_af.each do |task|
+          tasks_after << task['innerHTML']
+        end
+        
+        expect(FactoryBot.create(:forth_task).task_name).to eq tasks_after[0]
+      end
+    end
   end
   
   describe '一覧表示機能' do

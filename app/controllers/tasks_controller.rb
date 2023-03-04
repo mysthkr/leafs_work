@@ -6,6 +6,8 @@ class TasksController < ApplicationController
       @tasks = Task.all.order(:due_date)
     elsif params[:sort_created]
       @tasks = Task.all.order(created_at: :desc)
+    elsif params[:sort_priority]
+      @tasks = Task.all.order(:priority)
     elsif params[:task].present?
       keyword = params[:task][:task_name]
       status = params[:task][:status]
@@ -58,7 +60,7 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:task_name, :task_detail, :due_date, :status)
+    params.require(:task).permit(:task_name, :task_detail, :due_date, :status, :priority)
   end
   
   def set_task

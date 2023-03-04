@@ -6,20 +6,20 @@
 <%= link_to t('view.id_order'), tasks_path %>
 <%= link_to t('view.created_order_desc'), tasks_path(sort_created: "true") %>
 <%= link_to t('due_date_sort'), tasks_path(sort_expired: "true") %>
+<%= link_to t('priority_sort'), tasks_path(sort_priority: "true") %>
 
 <%= form_with(model: @task, local: true, scope: :task, url: tasks_path(search: "true"), method: :get) do |form| %>
   <div class="task_status">
     <%= form.label :status %>
     <%= form.select :status, [["ToDo", "ToDo"], ["Doing", "Doing"], ["Done", "Done"]] , { include_blank: true, selected: 1 } %>
   </div>
-
-    <%= form.label :task_name %>
-    <%= form.text_field :task_name %>
-
-    <%= form.hidden_field :search , value: true %>
-  
+  <%= form.label :task_name %>
+  <%= form.text_field :task_name %>
+  <%= form.hidden_field :search , value: true %>
   <%= form.submit value="検索する" %>
 <% end %>
+
+
 
 <table>
   <tr>
@@ -27,6 +27,7 @@
     <th><%= t('view.detail') %></th>
     <th><%= t('view.due_date') %></th>
     <th><%= t('view.status') %></th>
+    <th><%= t('view.priority') %></th>
   </tr>
 
   <% @tasks.each do |task| %>
@@ -35,6 +36,7 @@
       <td><%= task.task_detail %></td>
       <td><%= task.due_date.strftime('%Y-%m-%dT%T') %></td>
       <td><%= task.status %></td>
+      <td><%= task.priority %></td>
       
       <td><%= link_to t('view.task_detail'), task_path(task.id) %></td>
       <td><%= link_to t('view.edit_task'), edit_task_path(task.id) %></td>

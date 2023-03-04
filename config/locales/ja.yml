@@ -194,5 +194,6 @@ ja:
     due_date: 終了期限
     due_date_sort: 終了期限でソートする
     status: ステータス
-    
+    priority_sort: 優先順位でソートする
+    priority: 優先順位
     

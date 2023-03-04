@@ -27,6 +27,10 @@
     <%= form.label :status %>
     <%= form.select :status, [["ToDo", "ToDo"], ["Doing", "Doing"], ["Done", "Done"]] %>
   </div>
+  <div class="task_priority">
+    <%= form.label :priority %>
+    <%= form.select :priority, Task.priorities.keys.to_a, {} %>
+  </div>
   
   <%= form.submit %>
 <% end %>
