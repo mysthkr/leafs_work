@@ -32,5 +32,5 @@
     <%= form.select :priority, Task.priorities.keys.to_a, {} %>
   </div>
   
-  <%= form.submit %>
+  <%= form.submit nil , class: "btn btn-dark"%>
 <% end %>
