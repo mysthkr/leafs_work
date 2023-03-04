@@ -183,11 +183,17 @@ ja:
     pm: 午後
   view:
     task_list: タスク一覧
-    edit_task: タスク編集
+    edit_task: 編集
     create_task: タスク作成
-    task_detail: タスク詳細
-    delete_task: タスク削除
+    task_detail: 詳細
+    delete_task: 削除
     task: タスク
     detail: 詳細
     id_order: ID順
     created_order_desc: 作成日時降順
+    due_date: 終了期限
+    due_date_sort: 終了期限でソートする
+    status: ステータス
+    priority_sort: 優先順位でソートする
+    priority: 優先度
+    search: 検索する

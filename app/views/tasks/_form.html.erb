@@ -20,5 +20,17 @@
     <%= form.label :task_detail %>
     <%= form.text_field :task_detail %>
   </div>
-  <%= form.submit %>
+  <div class="task_due_date">
+    <%= form.datetime_field :due_date, value: Time.current.strftime('%Y-%m-%dT00:00:00') %>
+  </div>
+  <div class="task_status">
+    <%= form.label :status %>
+    <%= form.select :status, [["ToDo", "ToDo"], ["Doing", "Doing"], ["Done", "Done"]] %>
+  </div>
+  <div class="task_priority">
+    <%= form.label :priority %>
+    <%= form.select :priority, Task.priorities.keys.to_a, {} %>
+  </div>
+  
+  <%= form.submit nil , class: "btn btn-dark"%>
 <% end %>

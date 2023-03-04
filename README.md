@@ -10,7 +10,7 @@ User
 Task
 |  id  |  task_name | task_detail | status |  due_date  | priority |
 | ---- | ---------- | ----------- | ------ | ---------- | -------- |
-| int  |   string   |   string    |  int   |  datetime  |   int    |
+| int  |   string   |   string    | string |  datetime  |   int    |
 
 
 Label
