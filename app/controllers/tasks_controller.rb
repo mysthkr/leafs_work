@@ -1,27 +1,29 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :login_user_only, only: [:show, :edit, :update, :destroy]
   
   def index
+    @tasks = current_user.tasks
     if params[:sort_expired]
-      @tasks = Task.all.order(:due_date).page(params[:page])
+      @tasks = @tasks.all.order(:due_date).page(params[:page])
     elsif params[:sort_created]
-      @tasks = Task.all.order(created_at: :desc).page(params[:page])
+      @tasks = @tasks.all.order(created_at: :desc).page(params[:page])
     elsif params[:sort_priority]
-      @tasks = Task.all.order(:priority).page(params[:page])
+      @tasks = @tasks.all.order(:priority).page(params[:page])
     elsif params[:task].present?
       keyword = params[:task][:task_name]
       status = params[:task][:status]
       if keyword.present? && status.present?
-        @tasks = Task.search_key_status(keyword, status).page(params[:page])
+        @tasks = @tasks.search_key_status(keyword, status).page(params[:page])
       elsif keyword.present?
-        @tasks = Task.search_key(keyword).page(params[:page])
+        @tasks = @tasks.search_key(keyword).page(params[:page])
       elsif status.present?
-        @tasks = Task.search_status(status).page(params[:page])
+        @tasks = @tasks.search_status(status).page(params[:page])
       else
-        @tasks = Task.all.page(params[:page]).page(params[:page])
+        @tasks = @tasks.all.page(params[:page]).page(params[:page])
       end
     else
-      @tasks = Task.all.page(params[:page]).page(params[:page])
+      @tasks = @tasks.all.page(params[:page]).page(params[:page])
     end
   end
   
@@ -31,6 +33,7 @@ class TasksController < ApplicationController
   
   def create
     @task = Task.new(task_params)
+    @task.user_id = current_user.id
     if @task.save
       redirect_to tasks_path, notice: "タスクを作成しました！"
     else
@@ -65,5 +68,9 @@ class TasksController < ApplicationController
   
   def set_task
     @task = Task.find(params[:id])
+  end
+  
+  def login_user_only
+    redirect_to tasks_path unless @task.user_id == current_user.id 
   end
 end
