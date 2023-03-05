@@ -5,26 +5,27 @@ class TasksController < ApplicationController
   def index
     @tasks = current_user.tasks
     if params[:sort_expired]
-      @tasks = @tasks.all.order(:due_date).page(params[:page])
+      @tasks = @tasks.all.order(:due_date)
     elsif params[:sort_created]
-      @tasks = @tasks.all.order(created_at: :desc).page(params[:page])
+      @tasks = @tasks.all.order(created_at: :desc)
     elsif params[:sort_priority]
-      @tasks = @tasks.all.order(:priority).page(params[:page])
+      @tasks = @tasks.all.order(:priority)
     elsif params[:task].present?
       keyword = params[:task][:task_name]
       status = params[:task][:status]
       if keyword.present? && status.present?
-        @tasks = @tasks.search_key_status(keyword, status).page(params[:page])
+        @tasks = @tasks.search_key_status(keyword, status)
       elsif keyword.present?
-        @tasks = @tasks.search_key(keyword).page(params[:page])
+        @tasks = @tasks.search_key(keyword)
       elsif status.present?
-        @tasks = @tasks.search_status(status).page(params[:page])
+        @tasks = @tasks.search_status(status)
       else
-        @tasks = @tasks.all.page(params[:page]).page(params[:page])
+        @tasks = @tasks.all
       end
     else
-      @tasks = @tasks.all.page(params[:page]).page(params[:page])
+      @tasks = @tasks.all
     end
+    @tasks = @tasks.page(params[:page])
   end
   
   def new

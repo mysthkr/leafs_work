@@ -1,0 +1,31 @@
+<h1><%= t('view.task_list') %></h1>
+<p><%= notice %></p>
+
+<%= link_to t('view.id_order'), tasks_path ,class: "link-success" %>
+<%= link_to t('view.created_order_desc'), tasks_path(sort_created: "true"),class: "link-success" %>
+
+
+<table class='table table-striped'>
+  <tr>
+    <th><%= t('view.task') %></th>
+    <th><%= t('view.detail') %></th>
+    <th><%= link_to t('view.due_date'), tasks_path(sort_expired: "true") %></th>
+    <th><%= t('view.status') %></th>
+    <th><%= link_to t('view.priority'), tasks_path(sort_priority: "true") %></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <% @users.each do |user| %>
+    <tr>
+      <td class="task_name"><%= user.name %></td>
+      <td><%= user.email %></td>
+      <td><%= user.admin %></td>
+      
+      <td><%= link_to t('view.task_detail'), admin_user_path(user.id), class: "btn btn-primary" %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= paginate @users, theme: 'bootstrap-5'%>
