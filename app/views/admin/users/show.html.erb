@@ -2,15 +2,15 @@
 
 <p>メールアドレス: <%= @user.email %></p>
 
-<%= link_to t('view.task_list'), admin_users_path %>
+<%= link_to t('view.user_list'), admin_users_path %>
 
 <table class='table table-striped'>
   <tr>
     <th><%= t('view.task') %></th>
     <th><%= t('view.detail') %></th>
-    <th><%= link_to t('view.due_date'), tasks_path(sort_expired: "true") %></th>
+    <th><%= t('view.due_date') %></th>
     <th><%= t('view.status') %></th>
-    <th><%= link_to t('view.priority'), tasks_path(sort_priority: "true") %></th>
+    <th><%= t('view.priority') %></th>
     <th></th>
     <th></th>
     <th></th>

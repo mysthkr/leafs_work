@@ -1,6 +1,6 @@
 <h1>Sign up</h1>
 
-<%= form_with(model: @user, local: true) do |f| %>
+<%= form_with(model: @user, local: true, url: {controller: 'admin/users', action: 'create' }) do |f| %>
   <% if @user.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@user.errors.count, "error") %> prohibited this <%= @user.name %> from being saved:</h2>
@@ -11,7 +11,8 @@
       </ul>
     </div>
   <% end %>
-
+  
+  <%= link_to t('view.user_list'), admin_users_path %>
 
   <%= f.label :name %>
   <%= f.text_field :name %>
@@ -24,6 +25,9 @@
 
   <%= f.label :password_confirmation %>
   <%= f.password_field :password_confirmation %>
+  
+  <%= f.label :admin %>
+  <%= f.select :admin, [['非管理者',false],['管理者',true]], selected: 0 %>
 
   <%= f.submit "Create my account" %>
 <% end %>

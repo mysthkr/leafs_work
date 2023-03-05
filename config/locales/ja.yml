@@ -197,3 +197,10 @@ ja:
     priority_sort: 優先順位でソートする
     priority: 優先度
     search: 検索する
+    user: ユーザ名
+    email: メールアドレス
+    admin_auth: 管理者権限
+    user_list: ユーザ一覧
+    edit_user: ユーザ編集
+    task_number: タスク数
+    create_user: ユーザ作成

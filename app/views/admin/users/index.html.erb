@@ -1,17 +1,13 @@
 <h1><%= t('view.task_list') %></h1>
-<p><%= notice %></p>
 
-<%= link_to t('view.id_order'), tasks_path ,class: "link-success" %>
-<%= link_to t('view.created_order_desc'), tasks_path(sort_created: "true"),class: "link-success" %>
-
+<%= link_to t('view.create_user'), new_admin_user_path %>
 
 <table class='table table-striped'>
   <tr>
-    <th><%= t('view.task') %></th>
-    <th><%= t('view.detail') %></th>
-    <th><%= link_to t('view.due_date'), tasks_path(sort_expired: "true") %></th>
-    <th><%= t('view.status') %></th>
-    <th><%= link_to t('view.priority'), tasks_path(sort_priority: "true") %></th>
+    <th><%= t('view.user') %></th>
+    <th><%= t('view.email') %></th>
+    <th><%= t('view.task_number') %></th>
+    <th><%= t('view.admin_auth') %></th>
     <th></th>
     <th></th>
     <th></th>
@@ -21,9 +17,11 @@
     <tr>
       <td class="task_name"><%= user.name %></td>
       <td><%= user.email %></td>
+      <td><%= user.tasks.count %></td>
       <td><%= user.admin %></td>
-      
       <td><%= link_to t('view.task_detail'), admin_user_path(user.id), class: "btn btn-primary" %></td>
+      <td><%= link_to t('view.edit_task'), edit_admin_user_path(user.id), class: "btn btn-success" %></td>
+      <td><%= link_to t('view.delete_task'), admin_user_path(user.id), method: :delete , class: 'btn btn-danger' %></td>
     </tr>
   <% end %>
 </table>
