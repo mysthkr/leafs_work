@@ -11,6 +11,10 @@
   <%= form.label :task_name %>
   <%= form.text_field :task_name %>
   <%= form.hidden_field :search , value: true %>
+  
+  <%= form.label :label_id %>
+  <%= form.select :label_id, Label.all.collect { |p| [ p.name, p.id ] }, include_blank: true %>
+  
   <%= form.submit value=t('view.search'), class: "btn btn-dark" %>
 <% end %>
 

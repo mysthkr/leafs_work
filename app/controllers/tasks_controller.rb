@@ -13,15 +13,20 @@ class TasksController < ApplicationController
     elsif params[:task].present?
       keyword = params[:task][:task_name]
       status = params[:task][:status]
+      label = params[:task][:label_id]
       if keyword.present? && status.present?
         @tasks = @tasks.search_key_status(keyword, status)
       elsif keyword.present?
         @tasks = @tasks.search_key(keyword)
       elsif status.present?
         @tasks = @tasks.search_status(status)
+      elsif label.present?
+        @tasks = Label.find(label).tasks
       else
         @tasks = @tasks.all
       end
+
+      
     else
       @tasks = @tasks.all
     end

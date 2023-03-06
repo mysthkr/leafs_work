@@ -3,3 +3,8 @@
 <h1><%= t('view.task_detail') %></h1>
 <p><%= t('view.task') %>: <%= @task.task_name %></p>
 <p><%= t('view.detail') %>: <%= @task.task_detail %></p>
+<p><%= t('view.label') %>:
+  <% @task.labels.each do |label| %>
+    <%= label.name %>
+  <% end %>
+</p>
