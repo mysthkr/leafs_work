@@ -24,7 +24,14 @@ class UsersController < ApplicationController
   end
   
   def show
-    @user = User.find(params[:id])
+    @user = User.find_by(id: params[:id])
+    if @user == nil
+      redirect_to tasks_path
+    elsif @user.id == current_user.id
+      @tasks = Task.all.where(user_id: @user.id).includes(:user).page(params[:page])
+    else
+      redirect_to tasks_path
+    end
   end
 
   private

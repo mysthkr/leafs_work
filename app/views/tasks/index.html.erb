@@ -22,18 +22,19 @@
     <th><%= t('view.detail') %></th>
     <th><%= link_to t('view.due_date'), tasks_path(sort_expired: "true") %></th>
     <th><%= t('view.status') %></th>
+    <th><%= t('view.created_user') %></th>
     <th><%= link_to t('view.priority'), tasks_path(sort_priority: "true") %></th>
     <th></th>
     <th></th>
     <th></th>
   </tr>
-
   <% @tasks.each do |task| %>
     <tr>
       <td class="task_name"><%= task.task_name %></td>
       <td><%= task.task_detail %></td>
       <td><%= task.due_date.strftime('%Y-%m-%dT%T') %></td>
       <td><%= task.status %></td>
+      <td><%= task.user.name %></td>
       <td><%= task.priority %></td>
       
       <td><%= link_to t('view.task_detail'), task_path(task.id), class: "btn btn-primary" %></td>
