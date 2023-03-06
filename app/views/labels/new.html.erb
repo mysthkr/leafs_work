@@ -1,0 +1,21 @@
+<h1>Create label</h1>
+<%= link_to t('view.label_list'), labels_path %>
+
+
+<%= form_with(model: @label, local: true) do |f| %>
+  <% if @label.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@label.errors.count, "error") %> prohibited this <%= @user.name %> from being saved:</h2>
+      <ul>
+      <% @label.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.submit "Create label" %>
+<% end %>

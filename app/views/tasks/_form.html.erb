@@ -31,6 +31,12 @@
     <%= form.label :priority %>
     <%= form.select :priority, Task.priorities.keys.to_a, {} %>
   </div>
+  <div class="task_label">
+    <% Label.all.each do |label| %>
+      <%= form.check_box :label_ids, {multiple: true, checked: label[:checked], disabled: label[:disabled], include_hidden: false }, label[:id] %>
+      <%= label.name %>
+    <% end %> 
+  </div>
   
   <%= form.submit nil , class: "btn btn-dark"%>
 <% end %>

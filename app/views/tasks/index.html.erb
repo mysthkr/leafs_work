@@ -36,7 +36,11 @@
       <td><%= task.status %></td>
       <td><%= task.user.name %></td>
       <td><%= task.priority %></td>
-      
+      <td>
+        <% task.labels.each do |label| %>
+          <%= label.name %>
+        <% end %>
+      </td>
       <td><%= link_to t('view.task_detail'), task_path(task.id), class: "btn btn-primary" %></td>
       <td><%= link_to t('view.edit_task'), edit_task_path(task.id), class: "btn btn-success" %></td>
       <td><%= link_to t('view.delete_task'), task_path(task.id), method: :delete , class: 'btn btn-danger' %></td>

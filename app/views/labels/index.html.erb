@@ -1,0 +1,12 @@
+
+<%= link_to t('view.create_label'), new_label_path %>
+<table class='table table-striped'>
+  <tr>
+    <th><%= 'Label Name' %></th>
+  </tr>
+  <% @labels.each do |label| %>
+    <tr>
+      <td class="task_name"><%= label.name %></td>
+    </tr>
+  <% end %>
+</table>
