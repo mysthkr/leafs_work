@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
-  resources :tasks do
-    collection do
-      # get 'index_created_desc'
-    end
-  end
+  resources :tasks
+  resources :users, only: [:new, :create, :show]
+  resources :sessions, only: [:new, :create, :destroy]
   post 'index', to: 'tasks#index'
   root to: 'tasks#index'
+  namespace :admin do
+    resources :users
+  end
 end

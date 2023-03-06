@@ -1,0 +1,32 @@
+<h1><%= @user.name %>のページ</h1>
+
+<p>メールアドレス: <%= @user.email %></p>
+
+<%= link_to t('view.user_list'), admin_users_path %>
+
+<table class='table table-striped'>
+  <tr>
+    <th><%= t('view.task') %></th>
+    <th><%= t('view.detail') %></th>
+    <th><%= t('view.due_date') %></th>
+    <th><%= t('view.status') %></th>
+    <th><%= t('view.priority') %></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  
+  <% if @tasks.present? %>
+    <% @tasks.each do |task| %>
+      <tr>
+        <td class="task_name"><%= task.task_name %></td>
+        <td><%= task.task_detail %></td>
+        <td><%= task.due_date.strftime('%Y-%m-%dT%T') %></td>
+        <td><%= task.status %></td>
+        <td><%= task.priority %></td>
+      </tr>
+    <% end %>
+  <% end %>
+</table>
+
+<%= paginate @tasks, theme: 'bootstrap-5'%>

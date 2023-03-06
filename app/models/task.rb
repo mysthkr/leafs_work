@@ -6,5 +6,7 @@ class Task < ApplicationRecord
   scope :search_key,        -> (keyword){ where("task_name LIKE ?", "%#{keyword}%") }
   scope :search_status,     -> (status){ where(status: status) }
   
+  belongs_to :user
+  
   enum priority:{ High: 0, Middle: 1, Low: 2 }
 end
