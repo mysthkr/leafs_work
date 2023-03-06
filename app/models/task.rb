@@ -3,7 +3,7 @@ class Task < ApplicationRecord
   validates :task_detail,  presence: true, length: { maximum: 250 }
   
   has_many :task_labels, dependent: :destroy
-  has_many :task_label_labels, through: :task_labels, source: :label
+  has_many :labels, through: :task_labels, source: :label
   
   scope :search_key_status, -> (keyword, status){ where("task_name LIKE ?", "%#{keyword}%").where(status: status) }
   scope :search_key,        -> (keyword){ where("task_name LIKE ?", "%#{keyword}%") }
