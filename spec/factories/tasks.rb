@@ -8,12 +8,14 @@ FactoryBot.define do
     user_id {1}
   end
   factory :second_task, class: Task do
+    association :label
     task_name { 'test_name_2' }
     task_detail { 'test_detail_2' }
     due_date {"2023-03-01 14:21:26"}
     status {"Doing"}
     priority {2}
     user_id {1}
+    label_ids {[1]}
   end
   factory :third_task, class: Task do
     task_name { 'test_name_3' }
