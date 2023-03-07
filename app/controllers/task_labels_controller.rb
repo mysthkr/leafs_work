@@ -1,0 +1,3 @@
+class TaskLabelsController < ApplicationController
+  
+end

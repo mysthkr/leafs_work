@@ -205,3 +205,6 @@ ja:
     task_number: タスク数
     create_user: ユーザ作成
     created_user: 作成者
+    label_list: ラベルリスト
+    create_label: ラベル作成
+    label: ラベル

@@ -25,3 +25,5 @@ heroku config
 git add .
 git commit -m ""
 git push heroku step2:master
+
+heroku run rails db:migrate
